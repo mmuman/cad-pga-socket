@@ -166,7 +166,7 @@ module pga_socket(pga) {
                     translate([0, 0, -.1])
                         cylinder(2.2+.2, 0.7, 0.7, $fn=fn);
                     translate([0, 0, 2.2])
-                        cylinder(0.9, 0.9, $fn=fn);
+                        cylinder(0.9, 0.9, 0.9, $fn=fn);
                     // speed up rendering, that's just for the preview
                     if (!cavity) {
                         translate([0, 0, -3])
