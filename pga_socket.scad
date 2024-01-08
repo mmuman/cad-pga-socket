@@ -6,6 +6,10 @@
 // Which socket you need
 pga_which = "128"; // ["68-10x10":68 10x10 - MC68000,"68-11x11":68 11x11 - 80C286,"84","128":128 - MC68030,"132","223","238"]
 
+/*[Printing]*/
+
+// Radius margin for the pins
+pin_margin = 0.1; // [0.0:0.05:0.5]
 
 /*[Debug]*/
 
@@ -154,9 +158,8 @@ pga_pins = [
     ]
 ];
 
-module pga_socket(pga) {
+module pga_socket(pga, margin=0.0) {
     pitch=2.54;
-    margin = 0;
 
     module pin_array(pga, o = 0, cavity=false) {
         fn = cavity ? ($preview ? 8 : $fn) : 4;
@@ -164,9 +167,9 @@ module pga_socket(pga) {
             if (pga.z[pga.y-y-1][x] == "1") {
                 translate([pitch*(x+.5), pitch*(y+.5), 0]){
                     translate([0, 0, -.1])
-                        cylinder(2.2+.2, 0.7, 0.7, $fn=fn);
+                        cylinder(2.2+.2, 0.7 + o, 0.7 + o, $fn=fn);
                     translate([0, 0, 2.2])
-                        cylinder(0.9, 0.9, 0.9, $fn=fn);
+                        cylinder(0.9, 0.9 + o, 0.9 + o, $fn=fn);
                     // speed up rendering, that's just for the preview
                     if (!cavity) {
                         translate([0, 0, -3])
@@ -183,7 +186,7 @@ module pga_socket(pga) {
     }
 
     if ($preview)
-        color("Goldenrod") pin_array(pga, margin);
+        color("Goldenrod") pin_array(pga, 0);
 
     difference() {
         cube([pitch*pga.x, pitch*pga.y, 3]);
@@ -193,4 +196,4 @@ module pga_socket(pga) {
 
 idx = search([pga_which], pga_pins, num_returns_per_match=0, index_col_num=3);
 
-pga_socket(pga_pins[idx[0][0]]);
+pga_socket(pga_pins[idx[0][0]], pin_margin);
