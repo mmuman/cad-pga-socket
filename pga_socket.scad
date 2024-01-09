@@ -4,7 +4,7 @@
 /*[Variant]*/
 
 // Which socket you need
-pga_which = "128"; // ["68-10x10":68 10x10 - MC68000,"68-11x11":68 11x11 - 80C286,"84","114","128":128 - MC68030,"132","176","223","238"]
+pga_which = "128"; // ["12","64","68-10x10":68 10x10 - MC68000,"68-11x11":68 11x11 - 80C286,"84","114","128":128 - MC68030,"132","176","223","238"]
 
 // Remove matter in the center
 hollow = true;
@@ -20,10 +20,40 @@ $fn = 16;
 
 /*[Hidden]*/
 
-// a good reference: https://www.peconnectors.com/sockets-pga-cpu-and-memory/
+// some references:
+// https://www.precidip.com/data/files/pdf/cat14_PGA_BGA_PLCC_sockets.pdf
+// https://www.peconnectors.com/sockets-pga-cpu-and-memory/
+
 // Unicode Art!
 pga_pins = [
     // [ x, y, pins, count ]
+    [
+        5, 5,
+        [
+            "01110",
+            "10001",
+            "10001",
+            "10001",
+            "01110"
+        ],
+        "12"
+    ],
+    [
+        10, 10,
+        [
+            "1111111111",
+            "1111111111",
+            "11◤     11",
+            "11      11",
+            "11      11",
+            "11      11",
+            "11      11",
+            "11      11",
+            "1111111111",
+            "1111111111"
+        ],
+        "64"
+    ],
     [
         10, 10,
         [
